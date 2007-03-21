@@ -79,6 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/libvdeplug.so.*.*.*
+%dir %{_libdir}/vde2
 %{_libdir}/vde2/libvdetap.la
 %attr(755,root,root) %{_libdir}/vde2/libvdetap.so
 %attr(755,root,root) %{_libdir}/vdetap
