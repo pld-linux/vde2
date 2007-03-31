@@ -68,6 +68,8 @@ rm -rf $RPM_BUILD_ROOT
 #rm -f $RPM_BUILD_ROOT%{_bindir}/vdeqemu
 #ln -sf vdeq $RPM_BUILD_ROOT%{_bindir}/vdeqemu
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/vde2/libvdetap.a
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -87,10 +89,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libvdeplug.so
+%{_libdir}/libvdeplug.la
 %{_includedir}/libvdeplug.h
-/usr/lib64/libvdeplug.la
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libvdeplug.a
-%{_libdir}/vde2/libvdetap.a
