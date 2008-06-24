@@ -1,12 +1,13 @@
 Summary:	VDE2: Virtual Distributed Ethernet
 Summary(pl.UTF-8):	VDE2: wirtualny rozproszony ethernet
 Name:		vde2
-Version:	2.1.6
+Version:	2.2.1
 Release:	0.1
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	http://dl.sourceforge.net/vde/%{name}-%{version}.tar.bz2
-# Source0-md5:	68a9a5c4c8cf713bd4d97acc1eb341a6
+# Source0-md5:	e7854f33e702abb0436b89048c944400
+Patch0:		%{name}-pathmax.patch
 URL:		http://sourceforge.net/projects/vde/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -49,6 +50,7 @@ Statyczna biblioteka VDE2.
 
 %prep
 %setup -q 
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -80,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/libvdeplug.so.*.*.*
+%attr(755,root,root) %{_libdir}/libvde*.so.*.*.*
 %dir %{_libdir}/vde2
 %{_libdir}/vde2/libvdetap.la
 %attr(755,root,root) %{_libdir}/vde2/libvdetap.so
@@ -89,10 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libvdeplug.so
-%{_libdir}/libvdeplug.la
-%{_includedir}/libvdeplug.h
+%attr(755,root,root) %{_libdir}/libvde*.so
+%{_libdir}/libvde*.la
+%{_includedir}/*.h
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libvdeplug.a
+%{_libdir}/libvde*.a
