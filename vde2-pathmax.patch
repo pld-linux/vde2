@@ -1,0 +1,36 @@
+--- vde2-2.2.1/src/kvde_switch/consmgmt.h.s	2008-06-24 12:20:28.000000000 +0200
++++ vde2-2.2.1/src/kvde_switch/consmgmt.h	2008-06-24 12:20:41.000000000 +0200
+@@ -87,3 +87,7 @@
+ 	struct plugin *next;
+ };
+ #endif
++
++#ifndef PATH_MAX
++#define PATH_MAX 1024
++#endif
+--- vde2-2.2.1/src/vde_plug2tap.c.s	2008-06-24 12:26:21.000000000 +0200
++++ vde2-2.2.1/src/vde_plug2tap.c	2008-06-24 12:26:42.000000000 +0200
+@@ -49,6 +49,10 @@
+ #	endif
+ #endif
+ 
++#ifndef PATH_MAX
++#define PATH_MAX 1024
++#endif
++
+ VDECONN *conn;
+ 
+ char *prog;
+--- vde2-2.2.1/src/wirefilter.c.s	2008-06-24 12:27:33.000000000 +0200
++++ vde2-2.2.1/src/wirefilter.c	2008-06-24 12:27:49.000000000 +0200
+@@ -43,6 +43,10 @@
+ #	endif
+ #endif
+ 
++#ifndef PATH_MAX
++#define PATH_MAX 1024
++#endif
++
+ #define NPIPES 2
+ #define MAXCONN 3
+ static int alternate_stdin;
