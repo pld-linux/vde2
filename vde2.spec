@@ -1,12 +1,12 @@
 Summary:	VDE2: Virtual Distributed Ethernet
 Summary(pl.UTF-8):	VDE2: wirtualny rozproszony ethernet
 Name:		vde2
-Version:	2.2.1
+Version:	2.2.2
 Release:	0.1
 License:	GPL v2
 Group:		Networking/Utilities
 Source0:	http://dl.sourceforge.net/vde/%{name}-%{version}.tar.bz2
-# Source0-md5:	e7854f33e702abb0436b89048c944400
+# Source0-md5:	b198b92d511e4a6276b3bc87dfebe5d7
 Patch0:		%{name}-pathmax.patch
 URL:		http://sourceforge.net/projects/vde/
 BuildRequires:	autoconf
@@ -81,13 +81,27 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README
+%dir %{_sysconfdir}/vde2
+%dir %{_sysconfdir}/vde2/libvdemgmt
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/vde2/vdecmd
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/vde2/libvdemgmt/asyncrecv.rc
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/vde2/libvdemgmt/closemachine.rc
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/vde2/libvdemgmt/openmachine.rc
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/vde2/libvdemgmt/sendcmd.rc
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/libvde*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libvde*.so.0
+%attr(755,root,root) %{_libdir}/libvde*.so.2
 %dir %{_libdir}/vde2
+%dir %{_libdir}/vde2/vde_l3
 %{_libdir}/vde2/libvdetap.la
+%{_libdir}/vde2/vde_l3/*.la
+%{_libdir}/vde2/vde_l3/*.so
 %attr(755,root,root) %{_libdir}/vde2/libvdetap.so
 %attr(755,root,root) %{_libdir}/vdetap
 %{_mandir}/man1/*.1*
+%{_mandir}/man8/*.8*
 
 %files devel
 %defattr(644,root,root,755)
