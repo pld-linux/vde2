@@ -8,6 +8,7 @@ Group:		Networking/Utilities
 Source0:	http://downloads.sourceforge.net/vde/%{name}-%{version}.tar.bz2
 # Source0-md5:	46fbc5f97f03dc517aa3b2c9d9ea6628
 Patch0:		%{name}-pathmax.patch
+Patch1:		%{name}-format.patch
 URL:		http://sourceforge.net/projects/vde/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -85,6 +86,7 @@ Pythonowy interfejs do VDE2.
 %prep
 %setup -q 
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -96,7 +98,7 @@ Pythonowy interfejs do VDE2.
 	--disable-silent-rules \
 	--enable-kernel-switch
 
-%{__make} \
+%{__make} -j1 \
 	pythondir=%{py_sitedir}
 
 %install
