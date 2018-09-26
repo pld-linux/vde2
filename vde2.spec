@@ -2,13 +2,14 @@ Summary:	VDE2: Virtual Distributed Ethernet
 Summary(pl.UTF-8):	VDE2: wirtualny rozproszony ethernet
 Name:		vde2
 Version:	2.3.2
-Release:	4
+Release:	5
 License:	LGPL v2.1+ (libvdeplug), BSD (slirpvde), GPL v2+ (the rest)
 Group:		Networking/Utilities
 Source0:	http://downloads.sourceforge.net/vde/%{name}-%{version}.tar.bz2
 # Source0-md5:	46fbc5f97f03dc517aa3b2c9d9ea6628
 Patch0:		%{name}-pathmax.patch
 Patch1:		%{name}-format.patch
+Patch2:		%{name}-openssl-1.1.patch
 URL:		http://sourceforge.net/projects/vde/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -87,6 +88,7 @@ Pythonowy interfejs do VDE2.
 %setup -q 
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
@@ -156,7 +158,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/vdeterm
 %attr(755,root,root) %{_bindir}/wirefilter
 %attr(755,root,root) %{_sbindir}/vde_tunctl
-%attr(755,root,root) %{_libdir}/vdetap
+%attr(755,root,root) %{_libexecdir}/vdetap
 %dir %{_libdir}/vde2
 %attr(755,root,root) %{_libdir}/vde2/libvdetap.so
 %dir %{_libdir}/vde2/vde_l3
