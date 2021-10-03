@@ -1,6 +1,7 @@
---- vde2-2.2.1/src/kvde_switch/consmgmt.h.s	2008-06-24 12:20:28.000000000 +0200
-+++ vde2-2.2.1/src/kvde_switch/consmgmt.h	2008-06-24 12:20:41.000000000 +0200
-@@ -87,3 +87,7 @@
+diff -urNp -x '*.orig' vde2-2.3.2.org/src/kvde_switch/consmgmt.h vde2-2.3.2/src/kvde_switch/consmgmt.h
+--- vde2-2.3.2.org/src/kvde_switch/consmgmt.h	2011-11-23 17:41:17.000000000 +0100
++++ vde2-2.3.2/src/kvde_switch/consmgmt.h	2021-10-03 20:37:26.243228873 +0200
+@@ -87,3 +87,7 @@ struct plugin {
  	struct plugin *next;
  };
  #endif
@@ -8,9 +9,10 @@
 +#ifndef PATH_MAX
 +#define PATH_MAX 1024
 +#endif
---- vde2-2.2.1/src/vde_plug2tap.c.s	2008-06-24 12:26:21.000000000 +0200
-+++ vde2-2.2.1/src/vde_plug2tap.c	2008-06-24 12:26:42.000000000 +0200
-@@ -49,6 +49,10 @@
+diff -urNp -x '*.orig' vde2-2.3.2.org/src/vde_plug2tap.c vde2-2.3.2/src/vde_plug2tap.c
+--- vde2-2.3.2.org/src/vde_plug2tap.c	2011-11-23 17:41:18.000000000 +0100
++++ vde2-2.3.2/src/vde_plug2tap.c	2021-10-03 20:37:26.243228873 +0200
+@@ -51,6 +51,10 @@
  #	endif
  #endif
  
@@ -19,11 +21,12 @@
 +#endif
 +
  VDECONN *conn;
+ VDESTREAM *vdestream;
  
- char *prog;
---- vde2-2.2.1/src/wirefilter.c.s	2008-06-24 12:27:33.000000000 +0200
-+++ vde2-2.2.1/src/wirefilter.c	2008-06-24 12:27:49.000000000 +0200
-@@ -43,6 +43,10 @@
+diff -urNp -x '*.orig' vde2-2.3.2.org/src/wirefilter.c vde2-2.3.2/src/wirefilter.c
+--- vde2-2.3.2.org/src/wirefilter.c	2011-11-23 17:41:18.000000000 +0100
++++ vde2-2.3.2/src/wirefilter.c	2021-10-03 20:37:26.243228873 +0200
+@@ -49,6 +49,10 @@
  #	endif
  #endif
  
