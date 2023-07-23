@@ -2,7 +2,7 @@ Summary:	VDE2: Virtual Distributed Ethernet
 Summary(pl.UTF-8):	VDE2: wirtualny rozproszony ethernet
 Name:		vde2
 Version:	2.3.2
-Release:	6
+Release:	7
 License:	LGPL v2.1+ (libvdeplug), BSD (slirpvde), GPL v2+ (the rest)
 Group:		Networking/Utilities
 Source0:	http://downloads.sourceforge.net/vde/%{name}-%{version}.tar.bz2
@@ -10,13 +10,14 @@ Source0:	http://downloads.sourceforge.net/vde/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-pathmax.patch
 Patch1:		%{name}-format.patch
 Patch2:		%{name}-openssl-1.1.patch
+Patch3:		python3.patch
 URL:		http://sourceforge.net/projects/vde/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	libpcap-devel
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
-BuildRequires:	python-devel >= 1:2.5
+BuildRequires:	python3-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	%{name}-libs = %{version}-%{release}
@@ -89,6 +90,7 @@ Pythonowy interfejs do VDE2.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
@@ -101,26 +103,25 @@ Pythonowy interfejs do VDE2.
 	--enable-kernel-switch
 
 %{__make} -j1 \
-	pythondir=%{py_sitedir}
+	pythondir=%{py3_sitedir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install  \
 	DESTDIR=$RPM_BUILD_ROOT \
-	pythondir=%{py_sitedir}
+	pythondir=%{py3_sitedir}
 
 # loadable modules
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vde2/libvdetap.{la,a}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vde2/vde_l3/*.la
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/vdeplug_python.la
+%{__rm} $RPM_BUILD_ROOT%{py3_sitedir}/vdeplug_python.la
 # libs .la kept - no Requires/Libs.private
 
 cp -p src/slirpvde/README README.slirpvde
 
-%py_comp $RPM_BUILD_ROOT%{py_sitedir}
-%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
-%py_postclean
+%py3_comp $RPM_BUILD_ROOT%{py3_sitedir}
+%py3_ocomp $RPM_BUILD_ROOT%{py3_sitedir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -226,5 +227,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n python-vde2
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/vdeplug_python.so
-%{py_sitedir}/VdePlug.py[co]
+%attr(755,root,root) %{py3_sitedir}/vdeplug_python.so
+%{py3_sitedir}/VdePlug.py
+%{py3_sitedir}/__pycache__/VdePlug.cpython-*.py[co]
