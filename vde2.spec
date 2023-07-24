@@ -1,3 +1,8 @@
+#
+# Conditional build:
+%bcond_without	python2	# CPython 2.x module
+%bcond_without	python3	# CPython 3.x module
+
 Summary:	VDE2: Virtual Distributed Ethernet
 Summary(pl.UTF-8):	VDE2: wirtualny rozproszony ethernet
 Name:		vde2
@@ -17,9 +22,10 @@ BuildRequires:	automake
 BuildRequires:	libpcap-devel
 BuildRequires:	libtool
 BuildRequires:	openssl-devel
-BuildRequires:	python3-devel
+%{?with_python2:BuildRequires:	python-devel >= 1:2.5}
+%{?with_python3:BuildRequires:	python3-devel >= 1:3.2}
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.507
 Requires:	%{name}-libs = %{version}-%{release}
 Obsoletes:	vde < 2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -73,6 +79,18 @@ Static VDE2 library.
 %description static -l pl.UTF-8
 Statyczna biblioteka VDE2.
 
+%package -n python-vde2
+Summary:	Python interface to VDE2
+Summary(pl.UTF-8):	Pythonowy interfejs do VDE2
+Group:		Libraries/Python
+Requires:	%{name}-libs = %{version}-%{release}
+
+%description -n python-vde2
+Python interface to VDE2.
+
+%description -n python-vde2 -l pl.UTF-8
+Pythonowy interfejs do VDE2.
+
 %package -n python3-vde2
 Summary:	Python interface to VDE2
 Summary(pl.UTF-8):	Pythonowy interfejs do VDE2
@@ -98,30 +116,69 @@ Pythonowy interfejs do VDE2.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure  \
+%if %{with python2}
+install -d build-py2
+cd build-py2
+../%configure  \
+	PYTHON=%{__python} \
+	--disable-silent-rules \
+	--enable-kernel-switch
+
+%{__make} -j1 \
+	pythondir=%{py_sitedir}
+cd ..
+%endif
+
+%if %{with python3}
+install -d build-py3
+cd build-py3
+../%configure  \
+	PYTHON=%{__python3} \
 	--disable-silent-rules \
 	--enable-kernel-switch
 
 %{__make} -j1 \
 	pythondir=%{py3_sitedir}
+cd ..
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install  \
+%if %{with python3}
+%{__make} -C build-py3 install  \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pythondir=%{py3_sitedir}
+%endif
+
+%if %{with python2}
+%{__make} -C build-py2%{?with_python3:/src/lib/python} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	pythondir=%{py_sitedir}
+%endif
 
 # loadable modules
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vde2/libvdetap.{la,a}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/vde2/vde_l3/*.la
+%if %{with python2}
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/vdeplug_python.la
+%endif
+%if %{with python3}
 %{__rm} $RPM_BUILD_ROOT%{py3_sitedir}/vdeplug_python.la
+%endif
 # libs .la kept - no Requires/Libs.private
 
 cp -p src/slirpvde/README README.slirpvde
 
+%if %{with python2}
+%py_comp $RPM_BUILD_ROOT%{py_sitedir}
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
+%py_postclean
+%endif
+%if %{with python3}
 %py3_comp $RPM_BUILD_ROOT%{py3_sitedir}
 %py3_ocomp $RPM_BUILD_ROOT%{py3_sitedir}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -225,8 +282,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libvdeplug.a
 %{_libdir}/libvdesnmp.a
 
+%if %{with python2}
+%files -n python-vde2
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/vdeplug_python.so
+%{py_sitedir}/VdePlug.py[co]
+%endif
+
+%if %{with python3}
 %files -n python3-vde2
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py3_sitedir}/vdeplug_python.so
 %{py3_sitedir}/VdePlug.py
 %{py3_sitedir}/__pycache__/VdePlug.cpython-*.py[co]
+%endif

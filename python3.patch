@@ -1,21 +1,7 @@
-diff -ur vde2-2.3.2.orig/configure.ac vde2-2.3.2/configure.ac
---- vde2-2.3.2.orig/configure.ac	2011-11-23 17:41:19.000000000 +0100
-+++ vde2-2.3.2/configure.ac	2023-07-23 23:25:48.994431962 +0200
-@@ -192,7 +192,7 @@
- 
- if test x"$enable_python" = x"yes"; then
-   # check python
--  AM_PATH_PYTHON([2.5])
-+  AM_PATH_PYTHON([3])
-   AC_PATH_PROG(PYTHON_CONFIG, python$PYTHON_VERSION-config)
-   if test x"$PYTHON_CONFIG" = x""; then
-     AC_PATH_PROG(PYTHON_CONFIG, python-config)
-diff -ur vde2-2.3.2.orig/src/lib/python/VdePlug.py vde2-2.3.2/src/lib/python/VdePlug.py
 --- vde2-2.3.2.orig/src/lib/python/VdePlug.py	2011-11-23 17:41:17.000000000 +0100
 +++ vde2-2.3.2/src/lib/python/VdePlug.py	2023-07-23 23:38:52.517525533 +0200
-@@ -1,4 +1,4 @@
+@@ -1,4 +1,3 @@
 -#!/usr/bin/python
-+#!/usr/bin/python3
  
  '''
  
