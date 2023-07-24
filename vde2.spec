@@ -73,16 +73,16 @@ Static VDE2 library.
 %description static -l pl.UTF-8
 Statyczna biblioteka VDE2.
 
-%package -n python-vde2
+%package -n python3-vde2
 Summary:	Python interface to VDE2
 Summary(pl.UTF-8):	Pythonowy interfejs do VDE2
 Group:		Libraries/Python
 Requires:	%{name}-libs = %{version}-%{release}
 
-%description -n python-vde2
+%description -n python3-vde2
 Python interface to VDE2.
 
-%description -n python-vde2 -l pl.UTF-8
+%description -n python3-vde2 -l pl.UTF-8
 Pythonowy interfejs do VDE2.
 
 %prep
@@ -225,7 +225,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libvdeplug.a
 %{_libdir}/libvdesnmp.a
 
-%files -n python-vde2
+%files -n python3-vde2
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py3_sitedir}/vdeplug_python.so
 %{py3_sitedir}/VdePlug.py
