@@ -7,7 +7,7 @@ Summary:	VDE2: Virtual Distributed Ethernet
 Summary(pl.UTF-8):	VDE2: wirtualny rozproszony ethernet
 Name:		vde2
 Version:	2.3.2
-Release:	7
+Release:	8
 License:	LGPL v2.1+ (libvdeplug), BSD (slirpvde), GPL v2+ (the rest)
 Group:		Networking/Utilities
 Source0:	http://downloads.sourceforge.net/vde/%{name}-%{version}.tar.bz2
