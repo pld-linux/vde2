@@ -25,7 +25,7 @@ BuildRequires:	openssl-devel
 %{?with_python2:BuildRequires:	python-devel >= 1:2.5}
 %{?with_python3:BuildRequires:	python3-devel >= 1:3.2}
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.507
+BuildRequires:	rpmbuild(macros) >= 2.043
 Requires:	%{name}-libs = %{version}-%{release}
 Obsoletes:	vde < 2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -116,10 +116,11 @@ Pythonowy interfejs do VDE2.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+%define configuredir ..
 %if %{with python2}
 install -d build-py2
 cd build-py2
-../%configure  \
+%configure  \
 	PYTHON=%{__python} \
 	--disable-silent-rules \
 	--enable-kernel-switch
@@ -132,7 +133,7 @@ cd ..
 %if %{with python3}
 install -d build-py3
 cd build-py3
-../%configure  \
+%configure  \
 	PYTHON=%{__python3} \
 	--disable-silent-rules \
 	--enable-kernel-switch
