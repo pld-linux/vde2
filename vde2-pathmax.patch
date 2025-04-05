@@ -1,15 +1,3 @@
-diff -urNp -x '*.orig' vde2-2.3.2.org/src/kvde_switch/consmgmt.h vde2-2.3.2/src/kvde_switch/consmgmt.h
---- vde2-2.3.2.org/src/kvde_switch/consmgmt.h	2011-11-23 17:41:17.000000000 +0100
-+++ vde2-2.3.2/src/kvde_switch/consmgmt.h	2021-10-03 20:37:26.243228873 +0200
-@@ -87,3 +87,7 @@ struct plugin {
- 	struct plugin *next;
- };
- #endif
-+
-+#ifndef PATH_MAX
-+#define PATH_MAX 1024
-+#endif
-diff -urNp -x '*.orig' vde2-2.3.2.org/src/vde_plug2tap.c vde2-2.3.2/src/vde_plug2tap.c
 --- vde2-2.3.2.org/src/vde_plug2tap.c	2011-11-23 17:41:18.000000000 +0100
 +++ vde2-2.3.2/src/vde_plug2tap.c	2021-10-03 20:37:26.243228873 +0200
 @@ -51,6 +51,10 @@
