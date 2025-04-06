@@ -1,0 +1,8 @@
+--- vde-2-2.3.3/src/lib/vdesnmp.pc.in.orig	2022-05-02 19:39:19.000000000 +0200
++++ vde-2-2.3.3/src/lib/vdesnmp.pc.in	2025-03-30 22:07:27.651437757 +0200
+@@ -8,4 +8,4 @@ Description: SNMP library for Virtual Di
+ Version: @VERSION@
+ Libs: -L${libdir} -lvdesnmp
+ Cflags: -I${includedir}
+-
++Requires: vdemgmt
