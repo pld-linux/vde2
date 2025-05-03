@@ -122,6 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/dpipe
 %attr(755,root,root) %{_bindir}/unixcmd
 %attr(755,root,root) %{_bindir}/vde_autolink
+%attr(755,root,root) %{_bindir}/vde_cryptcab
 %attr(755,root,root) %{_bindir}/vde_over_ns
 %attr(755,root,root) %{_bindir}/vde_pcapplug
 %attr(755,root,root) %{_bindir}/vde_plug
